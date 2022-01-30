@@ -13,7 +13,7 @@ def call(){
         withSonarQubeEnv('sonarqube') {
             sh './gradlew sonarqube -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
         }
-    }
+    } 
     stage("Paso 3: Curl Springboot Gradle sleep 20"){
         sh "gradle bootRun&"
         sh "sleep 40 && curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
