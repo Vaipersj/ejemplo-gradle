@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage("Pipeline"){
             steps {
-                slackSend color: 'good', message: "[Su Nombre] [${JOB_NAME}] [${BUILD_TAG}] PRUEBA"  iconEmoji:"xD", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'token-slack'
                 script{
                     sh "env"
                   switch(params.compileTool)
