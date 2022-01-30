@@ -6,7 +6,6 @@
 def call(){
     env.TAREA = "Paso 1: Build && Test"
     stage($env.TAREA){
-        
         sh "gradle clean build"
     }
     stage("Paso 2: Sonar - Análisis Estático"){
