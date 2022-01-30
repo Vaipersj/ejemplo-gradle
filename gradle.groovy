@@ -16,6 +16,7 @@ def call(){
     stage("Paso 3: Curl Springboot Gradle sleep 20"){
         sh "gradle bootRun&"
         sh "sleep 40 && curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
+        sh "timeout 10 \$(which gradle) bootRun&"
     }
     stage("Paso 4: Subir Nexus"){
         nexusPublisher nexusInstanceId: 'nexus',
