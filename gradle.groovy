@@ -12,7 +12,7 @@ def call(){
         sh "echo 'Análisis Estático!'"
         withSonarQubeEnv('sonarqube') {
             sh './gradlew sonarqube -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
-            sh '[${env.JOB_NAME}] '${env.JOB_NAME}
+            sh '[${env.JOB_NAME}] '
         }
     } 
     stage("Paso 3: Curl Springboot Gradle sleep 20"){
