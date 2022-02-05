@@ -26,7 +26,7 @@ pipeline {
                         case 'Gradle':
                             def ejecucion = load 'gradle.groovy'
 
-                            if (GIT_BRANCH.startsWith('maven')) {
+                            if (GIT_BRANCH == ~ /maven. ) {
                                 sh "echo 'rama feature'"
                             }
                              else {
