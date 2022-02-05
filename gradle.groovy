@@ -13,6 +13,7 @@ def call(){
         sh "echo 'Análisis Estático!'"
         withSonarQubeEnv('sonarqube') {
             sh './gradlew sonarqube -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
+            sh "echo ${env.GIT_URL}"
     } 
 
 }
