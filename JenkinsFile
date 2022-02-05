@@ -21,6 +21,10 @@ pipeline {
                     {
                         case 'Maven':
                             def ejecucion = load 'maven.groovy'
+                            ejecucion.call()
+                        break;
+                        case 'Gradle':
+                            def ejecucion = load 'gradle.groovy'
 
                             if (GIT_BRANCH.startsWith('feature')) {
                                 sh "echo 'rama feature'"
@@ -28,11 +32,6 @@ pipeline {
                              else {
                                     sh "echo 'rama' ${env.GIT_BRANCH} "
                             }
-
-                            ejecucion.call()
-                        break;
-                        case 'Gradle':
-                            def ejecucion = load 'gradle.groovy'
                             ejecucion.call()
                         break;
                     }
