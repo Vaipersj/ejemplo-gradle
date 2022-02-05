@@ -22,7 +22,7 @@ pipeline {
                         case 'Maven':
                             def ejecucion = load 'maven.groovy'
 
-                            if GIT_BRANCH.startsWith('feature') {
+                            if (GIT_BRANCH.startsWith('feature')) {
                                 sh "echo rama feature"
                                 else {
                                     sh "echo rama ${env.GIT_BRANCH} "
