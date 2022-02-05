@@ -5,27 +5,43 @@ pipeline {
         NEXUS_PASSWORD     = credentials('NEXUS_PASS')
         GIT_REPO_NAME      = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
     }
+    parameters {
+        choice(
+            name:'compileTool',
+            choices: ['Maven', 'Gradle'],
+            description: 'Seleccione herramienta de compilacion'
+        )
+    }
     stages {
         stage("Pipeline"){
             steps {
                 script{
-                   
-                        def ejecucion = load 'gradle.groovy'
-                        String[] str
-                        str        = GIT_BRANCH.split('/')
-                        rama = str[1]
+                    sh "env"
+                  switch(params.compileTool)
+                    {
+                        case 'Maven':
+                            def ejecucion = load 'maven.groovy'
+                            ejecucion.call()
+                        break;
+                        case 'Gradle':
+                            def ejecucion = load 'gradle.groovy'
+                            String[] str
+                            str        = GIT_BRANCH.split('/')
+                            rama = str[1]
 
-                        if (rama.contains('maven') ) {
-                            sh "echo 'rama feature IC'"
+                            if (rama.contains('maven') ) {
+                                sh "echo 'rama feature'"
+                            }
+                             else {
+                                    sh "echo 'rama' ${env.GIT_BRANCH} "
+                                    sh "echo 'rama 2' ${str[1]} "
+                            }
                             ejecucion.call()
-                        }
-                        else {
-                            sh "echo 'rama 2' ${str[1]}  ' DC'"
-                            ejecucion.call()
-                        }
+                        break;
                     }
                 }
-                post{
+            }
+            post{
                 success{
                     slackSend color: 'good', message: "[Su Nombre] [${JOB_NAME}] [${BUILD_TAG}] Ejecucion Exitosa", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'token-slack'
                 }
@@ -34,7 +50,6 @@ pipeline {
                 }
             }
         }
-        
     }
 }
         
