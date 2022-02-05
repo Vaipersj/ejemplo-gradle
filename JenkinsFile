@@ -5,7 +5,7 @@ pipeline {
         NEXUS_PASSWORD     = credentials('NEXUS_PASS')
         GIT_REPO_NAME      = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
         GIT_RAMA           = GIT_BRANCH.split('/')
-        GIT_RAMA           = GIT_RAMA[1]
+        GIT_RAMA1           = GIT_RAMA[0]
 
 
     }
@@ -36,6 +36,7 @@ pipeline {
                              else {
                                     sh "echo 'rama' ${env.GIT_BRANCH} "
                                     sh "echo 'rama 2' ${env.GIT_RAMA} "
+                                    sh "echo 'rama 2' ${env.GIT_RAMA1} "
                             }
                             ejecucion.call()
                         break;
