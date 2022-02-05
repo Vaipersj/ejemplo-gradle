@@ -4,6 +4,7 @@ pipeline {
         NEXUS_USER         = credentials('NEXUS_USER')
         NEXUS_PASSWORD     = credentials('NEXUS_PASS')
         GIT_REPO           = "${GIT_URL}"
+        env.GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
     }
     parameters {
         choice(

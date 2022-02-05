@@ -11,9 +11,11 @@ def call(){
     }
     stage("Paso 2: Sonar - Análisis Estático"){
         sh "echo 'Análisis Estático!'"
+        sh "echo ${env.GIT_REPO_NAME}"
+
         withSonarQubeEnv('sonarqube') {
             sh './gradlew sonarqube -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
-            sh "echo ${env.GIT_URL}"
+            
     } 
 
 }
