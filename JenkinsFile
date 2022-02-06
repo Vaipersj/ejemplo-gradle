@@ -24,18 +24,6 @@ pipeline {
                             ejecucion.call()
                         break;
                         case 'Gradle':
-                            def ejecucion = load 'gradle.groovy'
-                            String[] str
-                            str        = GIT_BRANCH.split('/')
-                            rama = str[1]
-
-                            if (rama.contains('feature') || rama.contains('maven')) {
-                                sh "echo 'rama feature'"
-                            }
-                             else {
-                                    sh "echo 'rama' ${env.GIT_BRANCH} "
-                                    sh "echo 'rama 2' ${str[1]} "
-                            }
                             ejecucion.call()
                         break;
                     }
